@@ -2,7 +2,7 @@
 
 ### ESP32 
 
-**NO** | **Label**     | **Pin**   | **Deskripsi**                       |
+**No** | **Label**     | **Pin**   | **Deskripsi**                       |
 -------|---------------|-----------|-------------------------------------|
    1   | `IMU - SDA`   | GPIO-21   | Address 0x27                        |
    2   | `IMU - SCL`   | GPIO-22   |                                     |
