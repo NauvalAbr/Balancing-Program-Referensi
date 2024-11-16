@@ -180,7 +180,7 @@ void setup() {
   // Set NodeMCU Wifi hostname based on chip mac address
   char chip_id[15];
   snprintf(chip_id, 15, "%04X", (uint16_t)(ESP.getEfuseMac()>>32));
-  String hostname = "esp32brobot-" + String(chip_id);
+  String hostname = "ESP32RapiHans-" + String(chip_id);
 
   Serial.println();
   Serial.println("Hostname: "+hostname);

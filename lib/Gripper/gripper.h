@@ -1,0 +1,11 @@
+#ifndef GRIPPER_H_
+#define GRIPPER_H_
+
+#include <Arduino.h>
+#include <freertos/FreeRTOS.h>
+
+class Gripper {
+
+
+
+#endif /* GRIPPER_H_ */
