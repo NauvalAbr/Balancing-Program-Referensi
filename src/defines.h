@@ -8,20 +8,20 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
-#define PIN_ENABLE_MOTORS 12        
-#define PIN_MOTOR1_DIR 27    
-#define PIN_MOTOR1_STEP 14    
-#define PIN_MOTOR2_DIR 25    
-#define PIN_MOTOR2_STEP 26   
-#define PIN_SERVO 13    
+#define PIN_ENABLE_MOTORS 25        
+#define PIN_MOTOR1_DIR 15    
+#define PIN_MOTOR1_STEP 4    
+#define PIN_MOTOR2_DIR 18    
+#define PIN_MOTOR2_STEP 19   
+#define PIN_SERVO 26     
 #define PIN_LED 32         
 #define PIN_WIFI_LED 2        
 #define PIN_BUZZER 33         
 
 // NORMAL MODE PARAMETERS (MAXIMUN SETTINGS)
-#define MAX_THROTTLE 550
-#define MAX_STEERING 140
-#define MAX_TARGET_ANGLE 14
+#define MAX_THROTTLE 550 
+#define MAX_STEERING 140 
+#define MAX_TARGET_ANGLE 14 
 
 // PRO MODE = MORE AGGRESSIVE (MAXIMUN SETTINGS)
 #define MAX_THROTTLE_PRO 780   // Max recommended value: 860
@@ -35,7 +35,7 @@
 #define KI_THROTTLE 0.1
 #define KP_POSITION 0.06
 #define KD_POSITION 0.45
-//#define KI_POSITION 0.02
+#define KI_POSITION 0.02
 
 // Control gains for raiseup (the raiseup movement requiere special control parameters)
 #define KP_RAISEUP 0.1
@@ -58,14 +58,18 @@
 #define SERVO2_RANGE 8400
 
 #define ZERO_SPEED 0xffffff
-#define MAX_ACCEL 14      // Maximun motor acceleration (MAX RECOMMENDED VALUE: 20) (default:14)
+#define MAX_ACCEL 18      // Maximun motor acceleration (MAX RECOMMENDED VALUE: 20) (default:14)
 
-#define MICROSTEPPING 8   // 8 or 16 for 1/8 or 1/16 driver microstepping (default:16)
+#define MICROSTEPPING 16  // 8 or 16 for 1/8 or 1/16 driver microstepping (default:16)
 
 // AUX definitions
 #define CLR(x,y) (x&=(~(1<<y)))
 #define SET(x,y) (x|=(1<<y))
 #define RAD2GRAD 57.2957795
 #define GRAD2RAD 0.01745329251994329576923690768489
+
+//Servo Gripper
+// #define PIN_SERVO1 13
+// #define PIN_SERVO2 14
 
 #endif /* DEFINES_H_ */

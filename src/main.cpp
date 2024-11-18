@@ -147,7 +147,7 @@ void setup() {
   Serial.begin(115200);         // set up seriamonitor at 115200 bps
   Serial.setDebugOutput(true);
   Serial.println();
-  Serial.println("*ESP32 Camera Balancing Robot*");
+  Serial.println("*ESP32 Balancing Robot*");
   Serial.println("--------------------------------------------------------");
 
 
@@ -180,7 +180,7 @@ void setup() {
   // Set NodeMCU Wifi hostname based on chip mac address
   char chip_id[15];
   snprintf(chip_id, 15, "%04X", (uint16_t)(ESP.getEfuseMac()>>32));
-  String hostname = "ESP32RapiHans-" + String(chip_id);
+  String hostname = "RapiHans-" + String(chip_id);
 
   Serial.println();
   Serial.println("Hostname: "+hostname);

@@ -1,11 +1,15 @@
-#ifndef GRIPPER_H_
-#define GRIPPER_H_
+// #ifndef GRIPPER_H_
+// #define GRIPPER_H_
 
-#include <Arduino.h>
-#include <freertos/FreeRTOS.h>
+// #include <Arduino.h>
+// #include <freertos/FreeRTOS.h>
 
-class Gripper {
+// class Gripper {
+//     private:
+//         const int _servopin;        
+//     public:
+//         Gripper();
 
 
-
-#endif /* GRIPPER_H_ */
+// }
+// #endif /* GRIPPER_H_ */

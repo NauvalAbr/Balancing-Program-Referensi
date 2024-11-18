@@ -1,7 +1,12 @@
-#include "Gripper.h"
-#include "defines.h"
+// #include "Gripper.h"
+// #include "defines.h"
 
-Gripper::Gripper() {
-  pinMode(PIN_GRIPPER, OUTPUT);
-  digitalWrite(PIN_GRIPPER, LOW);
-}
+// Gripper::Gripper(uint8_t servopin) 
+//   : _servopin(servopin) {
+
+//   pinMode(_servopin, OUTPUT);
+
+// }
+
+// void Gripper::
+// }
