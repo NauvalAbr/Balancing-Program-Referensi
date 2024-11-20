@@ -1,13 +1,7 @@
-/*
- * esp32_wifi_balancing_robot.ino
- *
- *  Created on: 23.02.2021
- *      Author: anonymous
- */
- 
+// #include <ArduinoOTA.h>
+
 #include <Wire.h>
 #include <WiFi.h>
-#include <ArduinoOTA.h>
 #include <Arduino.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
@@ -36,20 +30,22 @@ const char* PARAM_FADER4 = "fader4";
 const char* PARAM_FADER5 = "fader5";
 const char* PARAM_FADER6 = "fader6";
 
-/* Wifi Crdentials */
-String sta_ssid = "p";     // set Wifi network you want to connect to
-String sta_password = "p";        // set password for Wifi network
+// /* Wifi Crdentials */
+// String sta_ssid = "riokwifi";     // set Wifi network you want to connect to
+// String sta_password = "12345";        // set password for Wifi network
 
 unsigned long previousMillis = 0;
 
 AsyncWebServer server(80);
 
+//Inisialisasi MPU
 void initMPU6050() {
   MPU6050_setup();
   delay(500);
   MPU6050_calibrate();
 }
 
+//Inisialisasi Timer
 void initTimers();
 
 void notFound(AsyncWebServerRequest *request) {
@@ -143,14 +139,17 @@ void processOSCMsg() {
   }
 }
 
+
+
+
+
 void setup() {
-  Serial.begin(115200);         // set up seriamonitor at 115200 bps
+  Serial.begin(115200);
+  Serial.println("Start");
+
   Serial.setDebugOutput(true);
-  Serial.println();
-  Serial.println("*ESP32 Balancing Robot*");
-  Serial.println("--------------------------------------------------------");
 
-
+//Setup Motor 
   pinMode(PIN_ENABLE_MOTORS, OUTPUT);
   digitalWrite(PIN_ENABLE_MOTORS, HIGH);
   
@@ -160,12 +159,15 @@ void setup() {
   pinMode(PIN_MOTOR2_STEP, OUTPUT);
   pinMode(PIN_SERVO, OUTPUT);
 
+//Setup led 
   pinMode(PIN_LED, OUTPUT);
   digitalWrite(PIN_LED, LOW);
 
+//Setup led wifi
   pinMode(PIN_WIFI_LED, OUTPUT);
   digitalWrite(PIN_WIFI_LED, LOW);
-  
+
+//Setup pin buzzer 
   pinMode(PIN_BUZZER, OUTPUT);
   digitalWrite(PIN_BUZZER, LOW);
 
@@ -186,13 +188,13 @@ void setup() {
   Serial.println("Hostname: "+hostname);
 
   // first, set NodeMCU as STA mode to connect with a Wifi network
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(sta_ssid.c_str(), sta_password.c_str());
-  Serial.println("");
-  Serial.print("Connecting to: ");
-  Serial.println(sta_ssid);
-  Serial.print("Password: ");
-  Serial.println(sta_password);
+  // WiFi.mode(WIFI_STA);
+  // WiFi.begin(sta_ssid.c_str(), sta_password.c_str());
+  // Serial.println("");
+  // Serial.print("Connecting to: ");
+  // Serial.println(sta_ssid);
+  // Serial.print("Password: ");
+  // Serial.println(sta_password);
 
   // try to connect with Wifi network about 8 seconds
   unsigned long currentMillis = millis();
@@ -205,27 +207,27 @@ void setup() {
 
   // if failed to connect with Wifi network set NodeMCU as AP mode
   IPAddress myIP;
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("");
-    Serial.println("*WiFi-STA-Mode*");
-    Serial.print("IP: ");
-    myIP=WiFi.localIP();
-    Serial.println(myIP);
-    digitalWrite(PIN_WIFI_LED, HIGH);    // Wifi LED on when connected to Wifi as STA mode
-    delay(2000);
-  } else {
+  // if (WiFi.status() == WL_CONNECTED) {
+  //   Serial.println("");
+  //   Serial.println("*WiFi-STA-Mode*");
+  //   Serial.print("IP: ");
+  //   myIP=WiFi.localIP();
+  //   Serial.println(myIP);
+  //   digitalWrite(PIN_WIFI_LED, HIGH);    // Wifi LED on when connected to Wifi as STA mode
+  //   delay(1000);
+  // } else {
     WiFi.mode(WIFI_AP);
     WiFi.softAP(hostname.c_str());
     myIP = WiFi.softAPIP();
-    Serial.println("");
-    Serial.println("WiFi failed connected to " + sta_ssid);
+    // Serial.println("");
+    // Serial.println("WiFi failed connected to " + sta_ssid);
     Serial.println("");
     Serial.println("*WiFi-AP-Mode*");
     Serial.print("AP IP address: ");
     Serial.println(myIP);
     digitalWrite(PIN_WIFI_LED, LOW);   // Wifi LED off when status as AP mode
     delay(2000);
-  }
+  // }
 
 
   // Send a GET request to <ESP_IP>/?fader=<inputValue>
@@ -270,11 +272,11 @@ void setup() {
       inputMessage = PARAM_PUSH3;
       if(inputValue.equals("1")) {
         digitalWrite(PIN_BUZZER, HIGH);
-        delay(150);
+        delay(120);
         digitalWrite(PIN_BUZZER, LOW);
         delay(80);
         digitalWrite(PIN_BUZZER, HIGH);
-        delay(150);
+        delay(120);
         digitalWrite(PIN_BUZZER, LOW);
         delay(80);
       }
@@ -353,11 +355,16 @@ void setup() {
   }
   ledcWrite(6, SERVO_AUX_NEUTRO);
 
-  ArduinoOTA.begin();   // enable to receive update/upload firmware via Wifi OTA
+  // ArduinoOTA.begin();   // enable to receive update/upload firmware via Wifi OTA
 }
 
+
+// ---------------------------------------------------------------------------------------
+//                                     LOOP
+//----------------------------------------------------------------------------------------
+
 void loop() {
-  ArduinoOTA.handle();
+  // ArduinoOTA.handle();
 
   if (OSCnewMessage) {
     OSCnewMessage = 0;
